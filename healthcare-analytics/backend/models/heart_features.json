@@ -1,0 +1,97 @@
+{
+  "model_name": "GradientBoostingClassifier",
+  "dataset": "Cleveland Heart Disease Dataset (UCI)",
+  "n_samples": 303,
+  "n_features": 13,
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "metrics": {
+    "accuracy": 81.2,
+    "precision": 82.8,
+    "recall": 82.9,
+    "f1": 82.6,
+    "auc_roc": 0.894,
+    "cv_folds": 10
+  },
+  "importances": [
+    {
+      "name": "thalach",
+      "importance": 0.1709,
+      "pct": 17.1
+    },
+    {
+      "name": "oldpeak",
+      "importance": 0.1679,
+      "pct": 16.8
+    },
+    {
+      "name": "thal",
+      "importance": 0.1141,
+      "pct": 11.4
+    },
+    {
+      "name": "age",
+      "importance": 0.1081,
+      "pct": 10.8
+    },
+    {
+      "name": "trestbps",
+      "importance": 0.0936,
+      "pct": 9.4
+    },
+    {
+      "name": "cp",
+      "importance": 0.0933,
+      "pct": 9.3
+    },
+    {
+      "name": "slope",
+      "importance": 0.0687,
+      "pct": 6.9
+    },
+    {
+      "name": "chol",
+      "importance": 0.0612,
+      "pct": 6.1
+    },
+    {
+      "name": "exang",
+      "importance": 0.0509,
+      "pct": 5.1
+    },
+    {
+      "name": "ca",
+      "importance": 0.0471,
+      "pct": 4.7
+    },
+    {
+      "name": "restecg",
+      "importance": 0.0091,
+      "pct": 0.9
+    },
+    {
+      "name": "sex",
+      "importance": 0.0081,
+      "pct": 0.8
+    },
+    {
+      "name": "fbs",
+      "importance": 0.0073,
+      "pct": 0.7
+    }
+  ],
+  "normalization": "StandardScaler (zero mean, unit variance)"
+}

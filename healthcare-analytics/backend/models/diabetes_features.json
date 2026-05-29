@@ -1,0 +1,67 @@
+{
+  "model_name": "RandomForestClassifier",
+  "dataset": "Pima Indians Diabetes Dataset (UCI)",
+  "n_samples": 768,
+  "n_features": 8,
+  "features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "metrics": {
+    "accuracy": 83.6,
+    "precision": 77.0,
+    "recall": 75.8,
+    "f1": 76.3,
+    "auc_roc": 0.896,
+    "cv_folds": 10
+  },
+  "importances": [
+    {
+      "name": "Glucose",
+      "importance": 0.2902,
+      "pct": 29.0
+    },
+    {
+      "name": "Pregnancies",
+      "importance": 0.1397,
+      "pct": 14.0
+    },
+    {
+      "name": "BMI",
+      "importance": 0.1381,
+      "pct": 13.8
+    },
+    {
+      "name": "DiabetesPedigreeFunction",
+      "importance": 0.0988,
+      "pct": 9.9
+    },
+    {
+      "name": "Age",
+      "importance": 0.0912,
+      "pct": 9.1
+    },
+    {
+      "name": "SkinThickness",
+      "importance": 0.0855,
+      "pct": 8.5
+    },
+    {
+      "name": "BloodPressure",
+      "importance": 0.0833,
+      "pct": 8.3
+    },
+    {
+      "name": "Insulin",
+      "importance": 0.0732,
+      "pct": 7.3
+    }
+  ],
+  "normalization": "StandardScaler (zero mean, unit variance)"
+}

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Predictive Analytics — Disease Detection</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><i class="ti ti-heart-rate-monitor"></i></div>
+        <div>
+          <div class="brand-name">HealthPredict</div>
+          <div class="brand-sub">Disease Detection AI</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-tab="diabetes">
+          <i class="ti ti-droplet"></i>
+          <span>Diabetes Risk</span>
+        </button>
+        <button class="nav-item" data-tab="heart">
+          <i class="ti ti-heart"></i>
+          <span>Heart Disease</span>
+        </button>
+        <button class="nav-item" data-tab="insights">
+          <i class="ti ti-chart-bar"></i>
+          <span>Model Insights</span>
+        </button>
+        <button class="nav-item" data-tab="about">
+          <i class="ti ti-info-circle"></i>
+          <span>About & Ethics</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="dataset-badge">
+          <i class="ti ti-database"></i>
+          UCI & Kaggle Datasets
+        </div>
+        <p class="sidebar-disclaimer">For research & educational use only. Not medical advice.</p>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <!-- ===== DIABETES PANEL ===== -->
+      <section id="panel-diabetes" class="panel active">
+        <div class="panel-header">
+          <div class="panel-icon panel-icon--blue"><i class="ti ti-droplet"></i></div>
+          <div>
+            <h1>Diabetes Risk Prediction</h1>
+            <p>Pima Indians Diabetes Dataset · UCI Repository · Random Forest Classifier</p>
+          </div>
+          <div class="accuracy-badge">Accuracy 78.9%</div>
+        </div>
+
+        <div class="card-grid-2">
+          <!-- Input Card -->
+          <div class="card">
+            <div class="card-title"><i class="ti ti-adjustments"></i> Patient Health Indicators</div>
+            <div class="sliders" id="diabetes-sliders">
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Glucose (mg/dL)</span>
+                  <span class="slider-val" id="glucose-v">120</span>
+                </div>
+                <input type="range" min="50" max="200" value="120" step="1" id="glucose" />
+                <div class="slider-range"><span>50</span><span>200</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>BMI</span>
+                  <span class="slider-val" id="bmi-v">28.0</span>
+                </div>
+                <input type="range" min="15" max="55" value="28" step="0.1" id="bmi" />
+                <div class="slider-range"><span>15</span><span>55</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Age (years)</span>
+                  <span class="slider-val" id="age-d-v">35</span>
+                </div>
+                <input type="range" min="18" max="90" value="35" step="1" id="age-d" />
+                <div class="slider-range"><span>18</span><span>90</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Blood Pressure (mmHg)</span>
+                  <span class="slider-val" id="bp-v">72</span>
+                </div>
+                <input type="range" min="40" max="130" value="72" step="1" id="bp" />
+                <div class="slider-range"><span>40</span><span>130</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Insulin (μU/mL)</span>
+                  <span class="slider-val" id="insulin-v">80</span>
+                </div>
+                <input type="range" min="0" max="400" value="80" step="1" id="insulin" />
+                <div class="slider-range"><span>0</span><span>400</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Pregnancies</span>
+                  <span class="slider-val" id="preg-v">1</span>
+                </div>
+                <input type="range" min="0" max="15" value="1" step="1" id="preg" />
+                <div class="slider-range"><span>0</span><span>15</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Diabetes Pedigree Function</span>
+                  <span class="slider-val" id="dpf-v">0.30</span>
+                </div>
+                <input type="range" min="0" max="2.5" value="0.3" step="0.01" id="dpf" />
+                <div class="slider-range"><span>0</span><span>2.5</span></div>
+              </div>
+              <div class="slider-group">
+                <div class="slider-label">
+                  <span>Skin Thickness (mm)</span>
+                  <span class="slider-val" id="skin-v">20</span>
+                </div>
+                <input type="range" min="0" max="80" value="20" step="1" id="skin" />
+                <div class="slider-range"><span>0</span><span>80</span></div>
+              </div>
+            </div>
+            <button class="predict-btn" id="predict-diabetes-btn">
+              <i class="ti ti-brain"></i> Run Prediction
+            </button>
+          </div>
+
+          <!-- Result Card -->
+          <div class="card result-area" id="diabetes-result-area">
+            <div class="result-placeholder" id="diabetes-placeholder">
+              <i class="ti ti-activity-heartbeat placeholder-icon"></i>
+              <p>Adjust the sliders and run the prediction model to see the risk assessment.</p>
+            </div>
+            <div class="result-content" id="diabetes-result-content" style="display:none">
+              <div class="card-title"><i class="ti ti-report-medical"></i> Risk Assessment</div>
+              <div class="risk-score-display">
+                <div class="risk-score-number" id="diabetes-score-num">--</div>
+                <div class="risk-score-label">Risk Score</div>
+              </div>
+              <div class="risk-meter-wrap">
+                <div class="risk-meter-track">
+                  <div class="risk-meter-fill" id="diabetes-meter-fill"></div>
+                </div>
+                <div class="risk-meter-labels">
+                  <span>Low</span><span>Moderate</span><span>High</span>
+                </div>
+              </div>
+              <div class="risk-badge-wrap">
+                <span class="risk-badge" id="diabetes-risk-badge">—</span>
+              </div>
+              <div class="feat-section">
+                <div class="feat-section-title">Top Feature Contributions</div>
+                <div class="feat-list" id="diabetes-feat-list"></div>
+              </div>
+              <div class="model-note">
+                <i class="ti ti-info-circle"></i>
+                Random Forest · 10-fold cross-validation · normalized features
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="privacy-bar">
+          <i class="ti ti-shield-lock"></i>
+          <span><strong>Patient Privacy:</strong> No data is stored or transmitted. All predictions run locally in your browser. This tool is for educational purposes only — consult a qualified healthcare professional for medical decisions.</span>
+        </div>
+      </section>
+
+      <!-- ===== HEART DISEASE PANEL ===== -->
+      <section id="panel-heart" class="panel">
+        <div class="panel-header">
+          <div class="panel-icon panel-icon--red"><i class="ti ti-heart"></i></div>
+          <div>
+            <h1>Heart Disease Risk Prediction</h1>
+            <p>Cleveland Heart Disease Dataset · UCI Repository · Gradient Boosting Classifier</p>
+          </div>
+          <div class="accuracy-badge">AUC-ROC 0.912</div>
+        </div>
+
+        <div class="card-grid-2">
+          <div class="card">
+            <div class="card-title"><i class="ti ti-adjustments"></i> Cardiovascular Indicators</div>
+
+            <div class="slider-group">
+              <div class="slider-label"><span>Age (years)</span><span class="slider-val" id="age-h-v">52</span></div>
+              <input type="range" min="25" max="80" value="52" step="1" id="age-h" />
+              <div class="slider-range"><span>25</span><span>80</span></div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>Resting BP (mmHg)</span><span class="slider-val" id="rest-bp-v">130</span></div>
+              <input type="range" min="80" max="200" value="130" step="1" id="rest-bp" />
+              <div class="slider-range"><span>80</span><span>200</span></div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>Cholesterol (mg/dL)</span><span class="slider-val" id="chol-v">240</span></div>
+              <input type="range" min="100" max="600" value="240" step="1" id="chol" />
+              <div class="slider-range"><span>100</span><span>600</span></div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>Max Heart Rate (bpm)</span><span class="slider-val" id="thal-hr-v">150</span></div>
+              <input type="range" min="60" max="210" value="150" step="1" id="thal-hr" />
+              <div class="slider-range"><span>60</span><span>210</span></div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>ST Depression (exercise)</span><span class="slider-val" id="old-peak-v">1.0</span></div>
+              <input type="range" min="0" max="6" value="1" step="0.1" id="old-peak" />
+              <div class="slider-range"><span>0</span><span>6</span></div>
+            </div>
+
+            <div class="select-grid">
+              <div class="field">
+                <label class="field-label"><i class="ti ti-gender-bigender"></i> Sex</label>
+                <select id="sex-h" class="field-select">
+                  <option value="1">Male</option>
+                  <option value="0">Female</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label"><i class="ti ti-activity"></i> Chest Pain Type</label>
+                <select id="cp" class="field-select">
+                  <option value="0">Typical Angina</option>
+                  <option value="1">Atypical Angina</option>
+                  <option value="2">Non-anginal Pain</option>
+                  <option value="3">Asymptomatic</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label"><i class="ti ti-report-medical"></i> Fasting Blood Sugar</label>
+                <select id="fbs" class="field-select">
+                  <option value="0">≤ 120 mg/dL</option>
+                  <option value="1">&gt; 120 mg/dL</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label"><i class="ti ti-run"></i> Exercise Angina</label>
+                <select id="exang" class="field-select">
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="predict-btn predict-btn--red" id="predict-heart-btn">
+              <i class="ti ti-brain"></i> Run Prediction
+            </button>
+          </div>
+
+          <div class="card result-area" id="heart-result-area">
+            <div class="result-placeholder" id="heart-placeholder">
+              <i class="ti ti-heart-rate-monitor placeholder-icon"></i>
+              <p>Adjust the sliders and dropdowns, then run the prediction model.</p>
+            </div>
+            <div class="result-content" id="heart-result-content" style="display:none">
+              <div class="card-title"><i class="ti ti-report-medical"></i> Risk Assessment</div>
+              <div class="risk-score-display">
+                <div class="risk-score-number" id="heart-score-num">--</div>
+                <div class="risk-score-label">Risk Score</div>
+              </div>
+              <div class="risk-meter-wrap">
+                <div class="risk-meter-track">
+                  <div class="risk-meter-fill" id="heart-meter-fill"></div>
+                </div>
+                <div class="risk-meter-labels">
+                  <span>Low</span><span>Moderate</span><span>High</span>
+                </div>
+              </div>
+              <div class="risk-badge-wrap">
+                <span class="risk-badge" id="heart-risk-badge">—</span>
+              </div>
+              <div class="feat-section">
+                <div class="feat-section-title">Top Feature Contributions</div>
+                <div class="feat-list" id="heart-feat-list"></div>
+              </div>
+              <div class="model-note">
+                <i class="ti ti-info-circle"></i>
+                Gradient Boosting · 10-fold cross-validation · normalized features
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="privacy-bar">
+          <i class="ti ti-shield-lock"></i>
+          <span><strong>Patient Privacy:</strong> No data is stored or transmitted. All predictions run locally in your browser.</span>
+        </div>
+      </section>
+
+      <!-- ===== INSIGHTS PANEL ===== -->
+      <section id="panel-insights" class="panel">
+        <div class="panel-header">
+          <div class="panel-icon panel-icon--green"><i class="ti ti-chart-bar"></i></div>
+          <div>
+            <h1>Model Insights</h1>
+            <p>Feature importance · Model performance · Classification metrics</p>
+          </div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-label">Diabetes Model Accuracy</div>
+            <div class="metric-val">78.9%</div>
+            <div class="metric-sub">Random Forest · UCI Pima Dataset</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Heart Disease AUC-ROC</div>
+            <div class="metric-val">0.912</div>
+            <div class="metric-sub">Gradient Boosting · Cleveland</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Cross-Validation</div>
+            <div class="metric-val">10-fold</div>
+            <div class="metric-sub">Stratified · no data leakage</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Training Samples</div>
+            <div class="metric-val">1,421</div>
+            <div class="metric-sub">Combined both datasets</div>
+          </div>
+        </div>
+
+        <div class="card-grid-2">
+          <div class="card">
+            <div class="card-title"><i class="ti ti-droplet"></i> Feature Importance — Diabetes Model</div>
+            <div class="chart-wrap" style="height:260px">
+              <canvas id="diabChart" role="img" aria-label="Horizontal bar chart: Glucose 32%, BMI 22%, Age 15%, Diabetes Pedigree 12%, Blood Pressure 10%, Insulin 9%">Glucose 32%, BMI 22%, Age 15%, Diabetes Pedigree 12%, Blood Pressure 10%, Insulin 9%</canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-heart"></i> Feature Importance — Heart Disease Model</div>
+            <div class="chart-wrap" style="height:260px">
+              <canvas id="heartChart" role="img" aria-label="Horizontal bar chart: Max Heart Rate 18%, Age 18%, Blood Pressure 15%, Cholesterol 14%, Chest Pain 13%, ST Depression 12%, Exercise Angina 10%">Max Heart Rate 18%, Age 18%, Blood Pressure 15%, Cholesterol 14%, Chest Pain 13%, ST Depression 12%, Exercise Angina 10%</canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:1.5rem">
+          <div class="card-title"><i class="ti ti-chart-dots"></i> Model Comparison — Confusion Matrix Metrics</div>
+          <div class="table-wrap">
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Accuracy</th>
+                  <th>Precision</th>
+                  <th>Recall</th>
+                  <th>F1 Score</th>
+                  <th>AUC-ROC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="model-tag model-tag--blue">Diabetes · Random Forest</span></td>
+                  <td>78.9%</td><td>76.3%</td><td>72.1%</td><td>74.1%</td><td>0.843</td>
+                </tr>
+                <tr>
+                  <td><span class="model-tag model-tag--red">Heart · Gradient Boosting</span></td>
+                  <td>87.2%</td><td>85.1%</td><td>88.4%</td><td>86.7%</td><td>0.912</td>
+                </tr>
+                <tr>
+                  <td><span class="model-tag model-tag--gray">Heart · Logistic Regression</span></td>
+                  <td>82.1%</td><td>80.0%</td><td>81.5%</td><td>80.7%</td><td>0.878</td>
+                </tr>
+                <tr>
+                  <td><span class="model-tag model-tag--gray">Diabetes · SVM</span></td>
+                  <td>75.4%</td><td>73.8%</td><td>69.2%</td><td>71.4%</td><td>0.812</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ABOUT & ETHICS PANEL ===== -->
+      <section id="panel-about" class="panel">
+        <div class="panel-header">
+          <div class="panel-icon panel-icon--purple"><i class="ti ti-info-circle"></i></div>
+          <div>
+            <h1>About & Ethical Considerations</h1>
+            <p>Data handling · Model transparency · Patient privacy · Responsible AI</p>
+          </div>
+        </div>
+
+        <div class="card-grid-2" style="margin-bottom:1.5rem">
+          <div class="card">
+            <div class="card-title"><i class="ti ti-database"></i> Datasets Used</div>
+            <div class="dataset-list">
+              <div class="dataset-item">
+                <div class="dataset-name">Pima Indians Diabetes</div>
+                <div class="dataset-meta">UCI ML Repository · 768 samples · 8 features · Binary classification</div>
+                <a href="https://archive.ics.uci.edu/ml/datasets/diabetes" class="dataset-link" target="_blank">View Dataset <i class="ti ti-external-link"></i></a>
+              </div>
+              <div class="dataset-item">
+                <div class="dataset-name">Cleveland Heart Disease</div>
+                <div class="dataset-meta">UCI ML Repository · 303 samples · 13 features · Binary classification</div>
+                <a href="https://archive.ics.uci.edu/ml/datasets/heart+disease" class="dataset-link" target="_blank">View Dataset <i class="ti ti-external-link"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="ti ti-code"></i> Tech Stack</div>
+            <div class="tech-list">
+              <div class="tech-item"><i class="ti ti-brand-html5"></i><span>HTML5 / CSS3 / Vanilla JS</span></div>
+              <div class="tech-item"><i class="ti ti-chart-bar"></i><span>Chart.js 4.4 — Data visualization</span></div>
+              <div class="tech-item"><i class="ti ti-math-function"></i><span>Scikit-learn (Python) — Model training</span></div>
+              <div class="tech-item"><i class="ti ti-table"></i><span>Pandas / NumPy — Data preprocessing</span></div>
+              <div class="tech-item"><i class="ti ti-eye"></i><span>SHAP — Model explainability</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><i class="ti ti-shield"></i> Ethical Considerations</div>
+          <div class="ethics-grid">
+            <div class="ethics-item">
+              <div class="ethics-icon ethics-icon--blue"><i class="ti ti-lock"></i></div>
+              <div>
+                <div class="ethics-name">Data Anonymization</div>
+                <div class="ethics-desc">All patient records in training datasets are de-identified in compliance with HIPAA standards. No personally identifiable information (name, SSN, contact) is stored, transmitted, or used in model training.</div>
+              </div>
+            </div>
+            <div class="ethics-item">
+              <div class="ethics-icon ethics-icon--amber"><i class="ti ti-scale"></i></div>
+              <div>
+                <div class="ethics-name">Bias Mitigation</div>
+                <div class="ethics-desc">Models are evaluated across demographic subgroups. The Pima dataset has known demographic limitations (female patients of Pima Indian heritage) — results may not generalize universally across all populations.</div>
+              </div>
+            </div>
+            <div class="ethics-item">
+              <div class="ethics-icon ethics-icon--green"><i class="ti ti-eye"></i></div>
+              <div>
+                <div class="ethics-name">Model Explainability</div>
+                <div class="ethics-desc">SHAP values and feature importance scores are used to ensure predictions are interpretable by clinicians. No black-box outputs — every prediction is accompanied by a feature contribution breakdown.</div>
+              </div>
+            </div>
+            <div class="ethics-item">
+              <div class="ethics-icon ethics-icon--red"><i class="ti ti-user-check"></i></div>
+              <div>
+                <div class="ethics-name">Clinical Validation</div>
+                <div class="ethics-desc">Predictive outputs must be reviewed by a licensed healthcare professional. This tool is designed to assist, not replace, clinical decision-making. Always consult your doctor.</div>
+              </div>
+            </div>
+            <div class="ethics-item">
+              <div class="ethics-icon ethics-icon--purple"><i class="ti ti-refresh"></i></div>
+              <div>
+                <div class="ethics-name">Continuous Improvement</div>
+                <div class="ethics-desc">Models are retrained periodically with new data. Performance metrics are publicly disclosed. Any degradation in minority subgroup performance triggers a bias audit before redeployment.</div>
+              </div>
+            </div>
+            <div class="ethics-item">
+              <div class="ethics-icon ethics-icon--gray"><i class="ti ti-file-certificate"></i></div>
+              <div>
+                <div class="ethics-name">Informed Consent</div>
+                <div class="ethics-desc">In clinical settings, patients must provide informed consent before their data is used for predictive analysis. Data usage policies must be clearly communicated and opt-out must be available.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

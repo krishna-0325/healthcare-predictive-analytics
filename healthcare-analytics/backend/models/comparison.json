@@ -1,0 +1,82 @@
+[
+  {
+    "model": "Random Forest",
+    "dataset": "Diabetes",
+    "accuracy": 83.6,
+    "precision": 80.9,
+    "recall": 69.8,
+    "f1": 74.8,
+    "auc_roc": 0.893,
+    "cv_folds": 10
+  },
+  {
+    "model": "Random Forest",
+    "dataset": "Heart",
+    "accuracy": 83.2,
+    "precision": 82.9,
+    "recall": 87.2,
+    "f1": 84.8,
+    "auc_roc": 0.895,
+    "cv_folds": 10
+  },
+  {
+    "model": "Gradient Boosting",
+    "dataset": "Diabetes",
+    "accuracy": 82.4,
+    "precision": 77.9,
+    "recall": 70.5,
+    "f1": 73.9,
+    "auc_roc": 0.886,
+    "cv_folds": 10
+  },
+  {
+    "model": "Gradient Boosting",
+    "dataset": "Heart",
+    "accuracy": 81.2,
+    "precision": 81.7,
+    "recall": 84.7,
+    "f1": 82.9,
+    "auc_roc": 0.889,
+    "cv_folds": 10
+  },
+  {
+    "model": "Logistic Regression",
+    "dataset": "Diabetes",
+    "accuracy": 81.8,
+    "precision": 77.0,
+    "recall": 69.1,
+    "f1": 72.5,
+    "auc_roc": 0.89,
+    "cv_folds": 10
+  },
+  {
+    "model": "Logistic Regression",
+    "dataset": "Heart",
+    "accuracy": 79.6,
+    "precision": 81.3,
+    "recall": 81.8,
+    "f1": 81.0,
+    "auc_roc": 0.894,
+    "cv_folds": 10
+  },
+  {
+    "model": "SVM",
+    "dataset": "Diabetes",
+    "accuracy": 83.2,
+    "precision": 79.2,
+    "recall": 71.7,
+    "f1": 75.0,
+    "auc_roc": 0.904,
+    "cv_folds": 10
+  },
+  {
+    "model": "SVM",
+    "dataset": "Heart",
+    "accuracy": 81.2,
+    "precision": 84.2,
+    "recall": 81.2,
+    "f1": 82.2,
+    "auc_roc": 0.886,
+    "cv_folds": 10
+  }
+]
